@@ -33,12 +33,13 @@ def delete_node(del_data):
 
     while next_node:
         if next_node.data == del_data:
-            next_next_node = next_node.next
+            # next_next_node = next_node.next
             pre_node.next = next_node.next
             next_next_node.prev = next_node.prev
             del next_node
             break
-
+        pre_node = next_node
+        next_node = next_node.next
 
 
 def insert_node(data):
@@ -55,11 +56,9 @@ def insert_node(data):
     node_T.prev = new_node
 
 
-
 def print_list():
     global node_A
     node = node_A
-    print(node.data)
     while node:
         print(node.data)
         node = node.next
