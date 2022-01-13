@@ -15,7 +15,7 @@ def pivotFirst(x, lmark, rmark):
     while lmark <= rmark:
         while lmark <= rmark and x[lmark] <= pivot_val:
             lmark += 1
-        while lmark <= rmark and x[rmark] >= pivot_val:
+        while lmark <= rmark and x[lmark] >= pivot_val:
             rmark -= 1
         if lmark <= rmark:
             swap(x, lmark, rmark)
@@ -41,7 +41,7 @@ def binary_search(a_list, wanted_data):
 
     while first <= last:
         idx = (first + last) // 2
-        counter += 1
+        counter_rec += 1
         if a_list[idx] == wanted_data:
             print('{item} found at position {i}'.format(item=wanted_data, i=idx))
             return True
@@ -54,17 +54,38 @@ def binary_search(a_list, wanted_data):
             return False
 
 
+def binary_search_recursive(a_list, wanted_data):
+    global counter_rec
+    first = 0
+    last = len(a_list) - 1
+
+    if len(a_list) == 0:
+        print('{item} not found in the list'.format(item=wanted_data))
+        return False
+    else:
+        idx = (first + last) // 2
+        counter_rec += 1
+        if wanted_data == a_list[idx]:
+            print('{item} found at position {i}'.format(item=wanted_data, i=idx))
+            return True
+        else:
+            if a_list[idx] < wanted_data:
+                return binary_search_recursive(a_list[idx+1:], wanted_data)
+            else:
+                return binary_search_recursive(a_list[:idx], wanted_data)
+
+
 if __name__ == '__main__':
     data = []
-    counter_rec = 0
-    input_n = input("The number of Data: ")
+    counter_rec= 0
+    input_n = input("The number of Total data: ")
     data = [randint(1, 100) for x in range(int(input_n))]
 
     print(" < After Sort > ")
     quickSort(data)
     print(data)
 
-    msg = binary_search(data, 50)
+    msg = binary_search_recursive(data, 50)
     if msg:
         print("Found {} for {} times of comparison".format(50, counter_rec))
     print(msg)
