@@ -30,6 +30,7 @@ while True:
         direction = (direction - 1) % 4
         direction_count.append(1)
 
+
     # 3. 방문한 육지인 경우
     elif map_matrix[a + xd][b + yd] == 2:  # gone
         # just turn left
